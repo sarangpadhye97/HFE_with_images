@@ -90,6 +90,111 @@
 }
 
 
+
+/* Banner container */
+.banner-container {
+    position: relative; /* Change to relative */
+    width: 250px; /* Explicit width for consistency */
+    top: 10px;
+    left: 0px;
+    z-index: 1000;
+}
+
+/* Banner styles */
+.coming-soon-banner {
+    background: linear-gradient(to right, #ffd700, #ffcc33);
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: rotate(-20deg);
+    transform-origin: left center;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+/* Text styles */
+.banner-text {
+    color: #228B22; /* Forest Green */
+    font-weight: 600;
+    font-size: 1.25rem;
+    transition: font-size 0.3s ease;
+}
+
+/* Arrow styles */
+.banner-arrow {
+    width: 20px;
+    height: 20px;
+    stroke: #228B22; /* Forest Green */
+    animation: pulse 2s infinite;
+}
+
+/* Pulse animation */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .banner-container {
+        top: 0px;
+        left: 0px;
+        width: 190px;
+    }
+
+    .coming-soon-banner {
+        padding: 8px 16px;
+        transform: rotate(-19deg);
+    }
+
+    .banner-text {
+        font-size: 0.9rem;
+    }
+    
+    .banner-arrow {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 576px) {
+    .banner-container {
+        top: -20px;
+        left: -10px;
+        width: 150px;
+    }
+
+    .coming-soon-banner {
+        padding: 6px 12px;
+        transform: rotate(-20deg);
+    }
+
+    .banner-text {
+        font-size: 0.7rem;
+    }
+
+    .banner-arrow {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+
+
         #about, #countdown, #contact, #contact-info {
             background: #fff;
             margin: 20px auto;
@@ -164,8 +269,8 @@
             color: #fff;
             text-align: center;
             padding: 15px;
-            margin-top: 20px;
             font-size: 0.9em;
+            margin-top: auto; /* Push footer to the bottom */
         }
     </style>
 </head>
@@ -205,8 +310,18 @@
 
 <!-- Home Section -->
 <section id="home">
+    <!-- Coming Soon Banner -->
+    <div class="banner-container">
+        <div class="coming-soon-banner">
+            <span class="banner-text">Coming soon in 2025</span>
+            <svg class="banner-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+        </div>
+    </div>
     <img style="margin-top: -50px;" src="https://green2gold.org/wp-content/uploads/2024/12/Screenshot-2024-12-13-045829-e1734056212417.png" alt="Fourth Slide">
-    <h1 style="margin-bottom: 10px;">Welcome to HarmFree Emporium</h1>
+    <h1 style="margin-bottom: 10px;">Welcome to HarmFree Emporium<sub style="font-size:12px;">TM</sub></h1>
     <i><p style="font-size: 30px;">Harm free to <span id="dynamic-text">Humans</span></p></i>
 <div id="bannerCarousel" class="carousel slide" data-interval="false">
 
@@ -339,7 +454,7 @@
 
 <!-- Footer -->
 <footer>
-    &copy; 2024 HarmFree Emporium. All Rights Reserved. | Website by Michelle Thuo.
+    &copy; 2024/2025 HarmFree Emporium. All Rights Reserved. | Website by Michelle Thuo.
 </footer>
 
 <script>
@@ -352,22 +467,21 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-    const words = ["Humans", "Animals", "Plants", "Planet"];
-    const dynamicText = document.getElementById("dynamic-text");
-    let index = 0;
+        const words = ["Humans", "Animals", "Plants", "Planet<sub style='font-size: 9px; font-style: bold;'>SM</sub>"];
+        const dynamicText = document.getElementById("dynamic-text");
+        let index = 0;
 
-    setInterval(() => {
-        // Update the text to the next word
-        index = (index + 1) % words.length; // Cycle through the words array
-        dynamicText.style.opacity = "0"; // Fade out
+        setInterval(() => {
+            // Update the text to the next word
+            index = (index + 1) % words.length; // Cycle through the words array
+            dynamicText.style.opacity = "0"; // Fade out
 
-        setTimeout(() => {
-            dynamicText.textContent = words[index]; // Change the text
-            dynamicText.style.opacity = "1"; // Fade in
-        }, 500); // Match this with the transition duration
-    }, 2000); // Change every 2 seconds
-});
-
+            setTimeout(() => {
+                dynamicText.innerHTML = words[index]; // Use innerHTML to allow HTML tags
+                dynamicText.style.opacity = "1"; // Fade in
+            }, 500); // Match this with the transition duration
+        }, 2000); // Change every 2 seconds
+    });
 </script>
 
 <script>
