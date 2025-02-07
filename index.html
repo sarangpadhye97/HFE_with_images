@@ -85,7 +85,7 @@
 }
 
 #dynamic-text {
-    color: #ffd700; /* Example color */
+    color: #ffd700; /* Gold */
     transition: opacity 0.5s ease-in-out;
 }
 
@@ -192,6 +192,49 @@
         height: 14px;
     }
 }
+
+/*View a selection of Upcoming Products*/
+.carousel-section {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.carousel-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.carousel-container {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-image {
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.carousel-info {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#product-name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#product-description {
+    font-size: 16px;
+    color: #333;
+}
+
 
 
 
@@ -322,8 +365,23 @@
         </div>
     </div>
     <img style="margin-top: -50px;" src="https://green2gold.org/wp-content/uploads/2024/12/Screenshot-2024-12-13-045829-e1734056212417.png" alt="Fourth Slide">
-    <h1 style="margin-bottom: 10px;">Welcome to HarmFree Emporium<sub style="font-size:12px;">TM</sub></h1>
-    <i><p style="font-size: 30px;">Harm free to <span id="dynamic-text">Humans</span></p></i>
+    <h1 style="margin-bottom: 10px;">Welcome to HarmFree Emporium<sup style="font-size:12px; vertical-align: 0.8em;">TM</sup></h1>
+    <i><p style="font-size: 30px;">HarmFree to <span id="dynamic-text">Humans</span></p></i>
+
+    <!--View a selection of Upcoming Products-->
+    <div class="carousel-section">
+    <h2 class="carousel-title">View a selection of Upcoming Products</h2>
+    
+    <div class="carousel-container">
+        <img id="daily-image" class="carousel-image" src="" alt="Upcoming Product">
+        <div class="carousel-info">
+            <h3 id="product-name"></h3>
+            <p id="product-description"></p>
+        </div>
+    </div>
+</div>
+
+
 <div id="bannerCarousel" class="carousel slide" data-interval="false">
 
         <!-- Indicators -->
@@ -467,8 +525,39 @@
 </script>
 
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const products = [
+        { image: "https://th.bing.com/th/id/OIP.R67QKzP19RVfL4K_Ht9W9AHaHa?rs=1&pid=ImgDetMain", name: "Eco-Friendly Bottle", description: "A sustainable water bottle made from bamboo." },
+        { image: "https://th.bing.com/th/id/R.aba1ab0928811dfeff71b7a4acb30776?rik=wZMlbRr35646UA&pid=ImgRaw&r=0", name: "Smart Plant Monitor", description: "Monitors soil moisture and helps your plants thrive." },
+        { image: "https://th.bing.com/th/id/OIP.Aa9BoYAczx--FX6NaM3O4QHaHa?rs=1&pid=ImgDetMain", name: "Solar-Powered Charger", description: "Charge your devices anywhere with solar energy." }
+    ];
+
+    const imageElement = document.getElementById("daily-image");
+    const nameElement = document.getElementById("product-name");
+    const descElement = document.getElementById("product-description");
+    const today = new Date().toDateString();
+
+    let storedData = JSON.parse(localStorage.getItem("dailyImage")) || {};
+
+    if (storedData.date !== today) {
+        const newIndex = (storedData.index + 1 || 0) % products.length;
+        storedData = { date: today, index: newIndex };
+        localStorage.setItem("dailyImage", JSON.stringify(storedData));
+    }
+
+    const selectedProduct = products[storedData.index];
+
+    imageElement.src = selectedProduct.image;
+    nameElement.textContent = selectedProduct.name;
+    descElement.textContent = selectedProduct.description;
+
+    imageElement.onload = () => imageElement.style.opacity = 1; // Smooth fade-in
+});
+</script>
+
+<script>
     document.addEventListener("DOMContentLoaded", () => {
-        const words = ["Humans", "Animals", "Plants", "Planet<sub style='font-size: 9px; font-style: bold;'>SM</sub>"];
+        const words = ["Humans", "Animals", "Plants", "Planet<sup style='font-size: 9px; font-style: bold; vertical-align: 0.8em;'>SM</sup>"];
         const dynamicText = document.getElementById("dynamic-text");
         let index = 0;
 
