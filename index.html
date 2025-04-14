@@ -316,6 +316,29 @@
             margin-top: auto; /* Push footer to the bottom */
             margin: 0;
         }
+
+        /* Cart Robot Image Styles */
+        .cart-robot {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            max-width: 150px;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .cart-robot {
+                max-width: 100px;
+                left: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .cart-robot {
+                display: none; /* Hide on very small screens */
+            }
+        }
     </style>
 </head>
 <body>
@@ -354,6 +377,9 @@
 
 <!-- Home Section -->
 <section id="home">
+    <!-- Cart Robot Image -->
+    <img src="cart_pushing_robot.png" alt="Cart Robot" class="cart-robot">
+    
     <!-- Coming Soon Banner -->
     <div class="banner-container">
         <div class="coming-soon-banner">
